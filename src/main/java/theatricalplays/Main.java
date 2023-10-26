@@ -1,5 +1,55 @@
 package theatricalplays;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.List;
+import java.util.Map;
+
+public class Main {
+    public static void main(String[] args) {
+        // Créez une instance de StatementPrinter
+        StatementPrinter statementPrinter = new StatementPrinter();
+        
+        Customer customer = new Customer("Lala", "C02", 47);
+        // Créez un exemple d'Invoice
+        Invoice invoice = new Invoice(customer, List.of(
+                new Performance("hamlet", 55),
+                new Performance("as-like", 55),
+                new Performance("othello", 100)));
+
+
+        // Créez une collection de Plays
+        Map<String, Play> plays = Map.of(
+            "hamlet",  new TragedyPlay("Hamlet"),
+            "as-like", new ComedyPlay("As You Like It"),
+            "othello", new TragedyPlay("Othello"));
+        // Appelez la méthode print de StatementPrinter
+        String statement = statementPrinter.print(invoice, plays);
+
+        // Affichez le résultat
+        System.out.println(statement);
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("statement.txt"))) {
+            writer.write(statement);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        String htmlstatement = statementPrinter.toHTML(invoice, plays);
+        System.out.println("HTML Statement:\n" + htmlstatement);
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("invoice.html"))) {
+            writer.write(htmlstatement);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+}
+
+
+
+/*package theatricalplays;
+
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
@@ -11,8 +61,9 @@ public class Main {
                 "hamlet",  new TragedyPlay("Hamlet"),
                 "as-like", new ComedyPlay("As You Like It"),
                 "othello", new TragedyPlay("Othello"));
-
-        Invoice invoice = new Invoice("BigCo", List.of(
+        
+        Customer customer = new Customer("BigCo", "C01", 0) ;        
+        Invoice invoice = new Invoice(customer ,List.of(
                 new Performance("hamlet", 55),
                 new Performance("as-like", 35),
                 new Performance("othello", 40)));
@@ -37,3 +88,4 @@ public class Main {
         }
     }
 }
+*/

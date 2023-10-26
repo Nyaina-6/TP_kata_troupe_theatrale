@@ -6,4 +6,4 @@ Amount owed is $2,490.00
 You have won  $15.00
 Final Amount owed is $2,475.00
 You earned 178 credits
-Your new credits is 28
+Your new credits is 28 
