@@ -29,7 +29,7 @@ public class StatementPrinter {
   }
   //Affiche les credits obtenus et les crédits Actuels , on soustrait 150 si les credits obtenus est plus de 150 aux credits actuels
   result.append(String.format("You earned %s credits\n", volumeCredits));
-  result.append(String.format("Your new credits is %s \n", customer.applyCreditsDiscount(invoice, plays)));
+  result.append(String.format("Your new credits is %s\n", customer.applyCreditsDiscount(invoice, plays)));
 
     // Convert the StringBuilder to a String and return it
     return result.toString();
@@ -71,8 +71,8 @@ public String toHTML(Invoice invoice, Map<String, Play> plays) {
           on a soustrait 150 aux credits Actuels sinon ce sont les crédits obtenus qui sont affichés*/
       result.append("<table border=1 >\n");
       result.append("<tr><th>Credits</th><th>Amount</th></tr>\n");
-      result.append("<tr><td  >Owed</td><td>").append(volumeCredits).append("</td></tr>\n");
-      result.append("<tr><td  >Actual</td><td>").append(customer.applyCreditsDiscount(invoice, plays)).append("</td></tr>\n");
+      result.append("<tr><td>Earned</td><td>").append(volumeCredits).append("</td></tr>\n");
+      result.append("<tr><td>Actual</td><td>").append(customer.applyCreditsDiscount(invoice, plays)).append("</td></tr>\n");
       result.append("</table>\n");
       
       result.append("<p>You must pay within 15 days otherwise your reservation will be cancelled.</p>\n");

@@ -1,8 +1,11 @@
 package theatricalplays;
 
 public class ComedyPlay extends Play {
-    public ComedyPlay(String name) {
+    public ComedyPlay(String name, String type) {
         super(name);
+        if (!ValidType(type) || !type.equals("comedy")) {
+            throw new IllegalArgumentException("Type invalide pour ComedyPlay: " + type);
+        }
     }
 
     @Override
