@@ -1,16 +1,14 @@
 package theatricalplays;
 
-public class Play {
+public abstract class Play {
+    public String name;
 
-  public String name;
-  public String type;
+    public Play(String name) {
+        this.name = name;
+    }
 
-  public Play(String name, String type) {
-    this.name = name;
-    this.type = type;
-  }
-  
+    public abstract double calculateAmount(Performance perf);
+    public abstract int calculateCredits(Performance perf);
 }
-
 
 
