@@ -8,9 +8,9 @@ import java.util.Map;
 public class Main {
     public static void main(String[]args) {
         Map<String, Play> plays = Map.of(
-                "hamlet",  new Play("Hamlet", "tragedy"),
-                "as-like", new Play("As You Like It", "comedy"),
-                "othello", new Play("Othello", "tragedy"));
+                "hamlet",  new TragedyPlay("Hamlet"),
+                "as-like", new ComedyPlay("As You Like It"),
+                "othello", new TragedyPlay("Othello"));
 
         Invoice invoice = new Invoice("BigCo", List.of(
                 new Performance("hamlet", 55),
