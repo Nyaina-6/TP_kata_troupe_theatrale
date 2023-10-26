@@ -1,10 +1,12 @@
 package theatricalplays;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
 public class Main {
-    public void main(String[]args) {
+    public static void main(String[]args) {
         Map<String, Play> plays = Map.of(
                 "hamlet",  new Play("Hamlet", "tragedy"),
                 "as-like", new Play("As You Like It", "comedy"),
@@ -16,8 +18,22 @@ public class Main {
                 new Performance("othello", 40)));
 
         StatementPrinter statementPrinter = new StatementPrinter();
-        String statement = statementPrinter.print(invoice, plays);
-
+        String statement = statementPrinter.toHTML(invoice, plays);
         System.out.println(statement);
+        String htmlStatement = statementPrinter.toHTML(invoice, plays);
+        System.out.println("HTML Statement:\n" + htmlStatement);
+
+        writeToFile("text_statement.txt", statement);
+        writeToFile("html_statement.html", htmlStatement);
+    }
+    private static void writeToFile(String fileName, String content) {
+        try {
+            FileWriter writer = new FileWriter(fileName);
+            writer.write(content);
+            writer.close();
+            System.out.println("File '" + fileName + "' written successfully.");
+        } catch (IOException e) {
+            System.err.println("Error writing to file '" + fileName + "': " + e.getMessage());
+        }
     }
 }
