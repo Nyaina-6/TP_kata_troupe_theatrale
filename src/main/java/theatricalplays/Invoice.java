@@ -12,7 +12,7 @@ public class Invoice {
     this.customer = customer;
     this.performances = performances;
   }
-//recupere le montant à payer pour chaque performance 
+//recupere le montant à payer pour chaque performance
 public double calculAmount (Performance perf , Play play){
     return play.calculateAmount(perf);
 }

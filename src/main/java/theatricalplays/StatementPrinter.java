@@ -41,7 +41,8 @@ public String toHTML(Invoice invoice, Map<String, Play> plays) {
       StringBuilder result = new StringBuilder();
 
       result.append("<html>\n<head><title>Invoice</title></head>\n<body>\n");
-      result.append("<h1>Statement for ").append(customer.getName()).append("</h1>\n");
+      result.append("<h1>Invoice</h1>\n");
+      result.append("<ul><li> Client :").append(customer.getName()).append("</li></ul>\n");
       result.append("<table border=1 >\n");
       result.append("<tr><th>Play</th><th>Seats</th><th>Amount</th></tr>\n");
 
@@ -58,6 +59,7 @@ public String toHTML(Invoice invoice, Map<String, Play> plays) {
 
       /*Si les credits obtenus par le client est superieur à 150 ,
             la condition affiche d'autre ligne en plus (la remise de 15$ et le montant final à payer après remise)*/
+
       int volumeCredits = invoice.calculCredits(invoice, plays);
       if (volumeCredits> 150 ) {
           double totaldiscount = invoice.calulTotalDiscount (invoice,plays);

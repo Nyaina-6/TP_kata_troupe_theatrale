@@ -16,7 +16,7 @@ public class Main {
         Invoice invoice = new Invoice(customer, List.of(
                 new Performance("hamlet", 55),
                 new Performance("as-like", 55),
-                new Performance("othello", 100)));
+                new Performance("othello", 60)));
 
         // crée une collection de Plays choisi par le client
         Map<String, Play> plays = Map.of(

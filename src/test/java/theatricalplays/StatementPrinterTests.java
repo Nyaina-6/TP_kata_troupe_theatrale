@@ -41,7 +41,7 @@ public class StatementPrinterTests {
         Customer customer = new Customer("Lala", "C02", 47);
     
         Invoice invoice = new Invoice(customer, List.of(
-                new Performance("henry-v", 155),
+                new Performance("hamlet", 155),
                 new Performance("as-like", 135),
                 new Performance("othello", 140)));
         StatementPrinter statementPrinter = new StatementPrinter();

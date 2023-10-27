@@ -9,7 +9,10 @@ public abstract class Play {
 
     // Méthode pour vérifier la validité du type
     protected boolean ValidType(String type) {
-        return type != null && (type.equals("tragedy") || type.equals("comedy"));
+        if ( type.equals("tragedy") || type.equals("comedy")){
+            return true;
+        }
+        return true;
     }
     public abstract double calculateAmount(Performance perf);
     public abstract int calculateCredits(Performance perf);
