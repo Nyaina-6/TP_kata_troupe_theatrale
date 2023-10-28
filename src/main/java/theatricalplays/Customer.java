@@ -25,16 +25,6 @@ public class Customer {
         return volumeCredits;
     }
 
-    //calcule les credits que chaque client a gagné
-    /*public int calculCreditsCustomer(Invoice invoice, Map<String, Play> plays) {
-        int volumeCredits = getVolumeCredits();
-        for (Performance perf : invoice.performances) {
-            Play play = plays.get(perf.playID);
-            volumeCredits += play.calculateCredits(perf);
-        }
-        return volumeCredits;
-    }*/
-
     //si le client a obtenu plus de 150 credits , on enleve 150 credits à ce qu'il a obtenu
     public int applyCreditsDiscount (Invoice invoice, Map<String, Play> plays){
         int volumeCredits = invoice.calculCredits(invoice, plays) ;

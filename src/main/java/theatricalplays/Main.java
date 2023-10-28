@@ -12,7 +12,7 @@ public class Main {
         StatementPrinter statementPrinter = new StatementPrinter();
         // prend un client
         Customer customer = new Customer("Lala", "C02", 47);
-        // crée un exemple d'Invoice
+        // crée les performances choisi par le client
         Invoice invoice = new Invoice(customer, List.of(
                 new Performance("hamlet", 55),
                 new Performance("as-like", 55),
@@ -34,7 +34,7 @@ public class Main {
         // génére le fichier HTML
         generateStatementFile(htmlstatement, "invoice.html", "HTML Statement");
     }
-    // la methode qui renvoie les fichiers 
+    // la methode qui renvoie les fichiers
     private static void generateStatementFile(String content, String fileName, String message) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
             writer.write(content);

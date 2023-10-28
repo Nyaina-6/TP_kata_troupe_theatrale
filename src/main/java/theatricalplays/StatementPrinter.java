@@ -17,7 +17,7 @@ public class StatementPrinter {
     NumberFormat frmt = NumberFormat.getCurrencyInstance(Locale.US);
     for (Performance perf : invoice.performances) {
       Play play = plays.get(perf.playID);
-      result.append(String.format("  %s: %s (%s seats)\n", play.name, frmt.format(invoice.calculAmount(perf, play)), perf.audience));
+      result.append(String.format("  %s: %s (%s seats)\n", play.name, frmt.format(play.calculateAmountPerformance(perf)), perf.audience));
     }
     //Affiche le montant à payer final en le convertissant en dollar
     result.append(String.format("Amount owed is %s\n", frmt.format(invoice.calculateTotalAmount(invoice,plays))));
@@ -42,20 +42,20 @@ public String toHTML(Invoice invoice, Map<String, Play> plays) {
 
       result.append("<html>\n<head><title>Invoice</title></head>\n<body>\n");
       result.append("<h1>Invoice</h1>\n");
-      result.append("<ul><li> Client :").append(customer.getName()).append("</li></ul>\n");
+      result.append("<ul><li>Client : ").append(customer.getName()).append("</li></ul>\n");
       result.append("<table border=1 >\n");
-      result.append("<tr><th>Play</th><th>Seats</th><th>Amount</th></tr>\n");
+      result.append("<tr><th>Play</th><th>Seats</th><th>Price</th></tr>\n");
 
       NumberFormat frmt = NumberFormat.getCurrencyInstance(Locale.US);
 
       for (Performance perf : invoice.performances) {
           Play play = plays.get(perf.playID);
-          double thisAmount = invoice.calculAmount(perf, play) ;
+          double thisAmount = play.calculateAmountPerformance(perf) ;
           result.append("<tr><td>").append(play.name).append("</td><td>").append(perf.audience).
           append("</td><td>").append(frmt.format(thisAmount)).append("</td></tr>\n");
           //totalAmount += thisAmount;
       }
-      result.append("<tr><td  colspan =2 >Total </td><td>").append(frmt.format(invoice.calculateTotalAmount(invoice,plays))).append("</td><tr>\n");
+      result.append("<tr><td  colspan =2 ><p>Total</p></td><td>").append(frmt.format(invoice.calculateTotalAmount(invoice,plays))).append("</td><tr>\n");
 
       /*Si les credits obtenus par le client est superieur à 150 ,
             la condition affiche d'autre ligne en plus (la remise de 15$ et le montant final à payer après remise)*/
@@ -64,15 +64,15 @@ public String toHTML(Invoice invoice, Map<String, Play> plays) {
       if (volumeCredits> 150 ) {
           double totaldiscount = invoice.calulTotalDiscount (invoice,plays);
           result.append("<tr><td  colspan =2 >Discount </td><td> - ").append(frmt.format(15)).append("</td><tr>\n");
-          result.append("<tr><td  colspan =2 >TOTAL </td><td>").append(frmt.format(totaldiscount)).append("</td><tr>\n");
+          result.append("<tr><td  colspan =2 ><p>TOTAL</p></td><td>").append(frmt.format(totaldiscount)).append("</td><tr>\n");
       }
       result.append("</table>\n");
-      result.append("<p>Your loyality points</p>\n");
+      result.append("<p>Your fidelity points</p>\n");
 
           /*Affiche les crédits obtenus et les crédits actuels si il y a une remise ,
           on a soustrait 150 aux credits Actuels sinon ce sont les crédits obtenus qui sont affichés*/
       result.append("<table border=1 >\n");
-      result.append("<tr><th>Credits</th><th>Amount</th></tr>\n");
+      result.append("<tr><th>Points</th><th>Amount</th></tr>\n");
       result.append("<tr><td>Earned</td><td>").append(volumeCredits).append("</td></tr>\n");
       result.append("<tr><td>Actual</td><td>").append(customer.applyCreditsDiscount(invoice, plays)).append("</td></tr>\n");
       result.append("</table>\n");

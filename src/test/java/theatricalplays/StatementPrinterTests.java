@@ -69,6 +69,25 @@ public class StatementPrinterTests {
 
         verify(htmlresult);
     }
+    @Test
+    void htmlstatementWithNewPlayTypes() {
+        Map<String, Play> plays = Map.of(
+            "hamlet",  new TragedyPlay("Hamlet","tragedy"),
+            "as-like", new ComedyPlay("As You Like It" ,"comedy"),
+            "othello", new TragedyPlay("Othello","tragedy"));
+                
+        
+        Customer customer = new Customer("Lala", "C02", 47);
+    
+        Invoice invoice = new Invoice(customer, List.of(
+                new Performance("hamlet", 155),
+                new Performance("as-like", 135),
+                new Performance("othello", 140)));
+        StatementPrinter statementPrinter = new StatementPrinter();
+        Assertions.assertDoesNotThrow(() -> {
+            statementPrinter.toHTML(invoice, plays);
+        });
+    }
 }
 
 

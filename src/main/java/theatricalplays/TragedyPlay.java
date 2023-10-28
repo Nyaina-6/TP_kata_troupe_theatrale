@@ -3,13 +3,13 @@ package theatricalplays;
 public class TragedyPlay extends Play {
     public TragedyPlay(String name , String type) {
         super(name);
-        if (!ValidType(type) || !type.equals("tragedy")) {
+        if (!ValidType(type)) {
             throw new IllegalArgumentException("Type invalide pour TragedyPlay: " + type);
         }
     }
 
     @Override
-    public double calculateAmount(Performance perf) {
+    public double calculateAmountPerformance(Performance perf) {
         int thisAmount = 400;
         if (perf.audience > 30) {
             thisAmount += 10 * (perf.audience - 30);
@@ -18,7 +18,7 @@ public class TragedyPlay extends Play {
     }
 
     @Override
-    public int calculateCredits(Performance perf) {
+    public int calculateCreditsPerformance(Performance perf) {
         return Math.max(perf.audience - 30, 0);
-    }
+    }    
 }

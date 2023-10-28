@@ -9,13 +9,13 @@ public abstract class Play {
 
     // Méthode pour vérifier la validité du type
     protected boolean ValidType(String type) {
-        if ( type.equals("tragedy") || type.equals("comedy")){
-            return true;
-        }
-        return true;
+        return type.equals("tragedy") || type.equals("comedy");
     }
-    public abstract double calculateAmount(Performance perf);
-    public abstract int calculateCredits(Performance perf);
+    //pour calculer le montant à payer pour chaque performance
+    public abstract double calculateAmountPerformance(Performance perf);
+    
+    //calcul les credits qu'on attribue aux clients pour chaque performance 
+    public abstract int calculateCreditsPerformance(Performance perf);
     
 
 }
